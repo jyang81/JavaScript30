@@ -6,40 +6,91 @@
 </head>
 <body>
 
-  <p onClick="makeGreen()">×BREAK×DOWN×</p>
+  <p class='poop' onClick="makeGreen()">×BREAK×DOWN×</p>
+  <hr>
+  <br>
+  <marquee>Open console for more info ---></marquee>
 
   <script>
-    const dogs = [{ name: 'Snickers', age: 2 }, { name: 'hugo', age: 8 }];
+    const dogs = [{ name: 'Max', age: 2 }, { name: 'Pluto', age: 8 }, { name: 'Ein', age: 4 }];
 
     function makeGreen() {
       const p = document.querySelector('p');
-      p.style.color = '#BADA55';
+      p.style.color = '#aaee33';
       p.style.fontSize = '50px';
+      p.style.fontFamily = 'Courier New'
     }
 
+    // Find where JS is coming from on an element:
+    // 1) Inspect element, right click on element
+    // 2) In drop down menu, select "break on" -> "attribute modifications"
+    // 3) This will insert a debugger and show you where the JS is
+
+    console.clear()
+
     // Regular
+    console.log("Hello World");
 
     // Interpolated
+    var adj = 'poopy'
+    console.log('I am a %s string', adj)
+    console.log(`Hello, Mr. ${adj} pants.`)
 
     // Styled
+    console.log('%c To be or not to be...', "font-family: 'Comic Sans MS'; font-size: 20px; color: yellow; background: darkblue")
 
     // warning!
+    console.warn("Warning: Unauthorized distribution of this code is prohibited by law.")
 
     // Error :|
+    console.error("Does not compute!")
 
     // Info
+    console.info("Fun fact: A giraffe's tongue is black.")
+    // Doesn't seem to work in my browser ('i' icon doesn't show)
 
-    // Testing
+    // Testing (only fires if assertion is false)
+    const p = document.querySelector('p');
+    console.assert(p.classList.contains('poo'), "That is wrong.")
 
     // clearing
+    // console.clear();
 
     // Viewing DOM Elements
+    console.log(p);
+    console.dir(p); // can click to see all properties of element
 
     // Grouping together
+    dogs.forEach(dog => {
+      // .group for opened view, .groupCollapsed for collapsed view
+      console.groupCollapsed(`${dog.name}`)
+      console.log(`This is ${dog.name}.`);
+      console.log(`${dog.name} is ${dog.age} years old.`);
+      console.log(`That is ${dog.age * 7} in dog years.`);
+      console.groupEnd(`${dog.name}`);
+    });
 
     // counting
+    console.count("Joe");
+    console.count("Joe");
+    console.count(adj);
+    console.count(adj);
+    console.count("Joe");
+    console.count("Joe");
+    console.count(adj);
+    console.count("Joe");
 
     // timing
+    console.time('fetching data from github');
+    fetch('https://api.github.com/users/jyang81')
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        console.timeEnd('fetching data from github')
+      })
+      
+    // table
+    console.table(dogs)
 
   </script>
 </body>
