@@ -6,7 +6,45 @@
   <script type="text/javascript" src="https://www.cornify.com/js/cornify.js"></script>
 </head>
 <body>
+  <h1>Watch out for unicorns!</h1>
+  <p>Press the secret code to see what happens!</p>
+  <p><em>Hint: The colors of the rainbow</em></p>
+  <small>(The Konami code also works)</small>
+
+<style>
+
+  html {
+    text-align: center;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  body {
+    height: 100vh;
+  }
+
+</style>
+
 <script>
+
+const pressed = [];
+// const secretCode = '82798971667386' // ROYGBIV
+const secretCodeArray = [82,79,89,71,66,73,86]
+
+window.addEventListener('keyup', (e) => {
+  pressed.push(e.keyCode);
+  pressed.splice(-secretCodeArray.length - 1, pressed.length - secretCodeArray.length)
+  if (pressed.join('') === secretCodeArray.join('')) {
+    console.log("%c Congratulations!", "font-family: 'Comic Sans MS'; color: #FC00FF; font-size: 18pt");
+    changeBackground();
+    cornify_add();
+  }
+})
+
+const main = document.querySelector('body')
+function changeBackground() {
+  main.style.backgroundImage = "linear-gradient(315deg, #00DBDE 0%, #FC00FF 100%)"
+}
+
 </script>
 </body>
 </html>
