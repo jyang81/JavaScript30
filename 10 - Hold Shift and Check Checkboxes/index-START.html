@@ -39,6 +39,19 @@
       margin: 20px;
     }
 
+    button {
+      padding: 8px;
+      font-family:'helvetica neue';
+      font-size: 18px;
+      font-weight: 300;
+      letter-spacing: 0.1ch;
+      margin: auto;
+    }
+
+    .header {
+      padding: 10px;
+    }
+
     p {
       margin: 0;
       padding: 20px;
@@ -57,6 +70,9 @@
 
   -->
   <div class="inbox">
+    <div class="item header">
+      <button id="all" onClick="handleClick()">Select All</button>
+    </div>
     <div class="item">
       <input type="checkbox">
       <p>This is an inbox layout.</p>
@@ -96,6 +112,50 @@
   </div>
 
 <script>
+const checkboxes = document.querySelectorAll('.inbox input[type="checkbox"]');
+
+let lastChecked;
+
+function handleCheck(e) {
+  let inBetween = false;
+
+  if (e.shiftKey && this.checked) {
+    checkboxes.forEach(checkbox => {
+      // console.log(checkbox);
+
+      if (checkbox === this || checkbox === lastChecked) {
+        inBetween = !inBetween;
+        // console.log('End point');
+      }
+
+      if (inBetween) {
+        checkbox.checked = true;
+      }
+    });
+  }
+  lastChecked = this;
+}
+
+let clicked = false;
+
+function handleClick() {
+  const button = document.getElementById("all");
+    if (clicked) {
+      button.textContent = "Select All";
+      checkboxes.forEach(checkbox => {
+        checkbox.checked = false;
+      })
+    } else {
+      button.textContent = "Deselect All";
+      checkboxes.forEach(checkbox => {
+        checkbox.checked = true;
+      })
+    }
+  clicked = !clicked;
+}
+
+checkboxes.forEach(checkbox => checkbox.addEventListener('click', handleCheck))
+
 </script>
 </body>
 </html>
