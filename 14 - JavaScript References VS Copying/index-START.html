@@ -6,17 +6,77 @@
 </head>
 <body>
 
+  <style>
+    body {
+      text-align: center;
+      font-family: sans-serif;
+    }
+    code {
+      background-color: lightgray;
+      padding: 0.2rem 0.4rem;
+      font-size: 1.1rem;
+    }
+  </style>
+
+  <h1>Reference vs Copy</h1>
+  <h3>(Open the console)</h3>
+  <p>Strings, numbers, and booleans create copies when you assign them to another variable.</p>
+  <p><code>let item = "banana"</code></p>
+  <p><code>let item2 = item</code></p></p>
+  <p><code>item = "orange"</code></p>
+  <p><code>item => "orange", item2 => "banana"</code></p>
+  <hr>
+  <p>Arrays and objects create references to the original item. So, if you want to make a copy of the original, you must use alternate methods.</p>
+  <p><code>let array = [1,2,3,4]</code></p>
+  <p><code>let array2 = array</code></p>
+  <p><code>array[3] = 7</code></p>
+  <p>If you change one array, it will change the other as well.</p>
+  <p><code>array => [1,2,3,7], array2 => [1,2,3,7]</code></p>
+  <p>In order to avoid this behavior, you can make a copy using various methods:</p>
+  <p>Note: this only creates a shallow copy!</p>
+  <p>The spread operator: <code>let array2 = [...array]</code></p>
+  <p>Array.from(): <code>let array2 = Array.from(array)</code></p>
+  <p>.slice(): <code>let array2 = array.slice()</code></p>
+  <p>.concat(): <code>let array2 = [].concat(array)</code></p>
+  
+  <p>For objects:</p>
+  <p>The spread operator: <code>let object2 = {...object}</code></p>
+  <p>Object.assign(): <code>let object2 = Object.assign({}, object)</code></p>
+  
+
   <script>
     // start with strings, numbers and booleans
+    let age = 100;
+    let age2 = age;
+    // console.log({age, age2})
+    age = 200;
+    // console.log({age, age2})
+    // age2 doesn't change! 
+    let item = "banana";
+    let item2 = item;
+    item = "orange";
+
+    let name = "Joe";
+    let name2 = name;
+
+    console.log({name, name2});
+
+    name = "Fry";
+    console.log({name, name2});
 
     // Let's say we have an array
-    const players = ['Wes', 'Sarah', 'Ryan', 'Poppy'];
+    const players = ['Nibbler', 'Amy', 'Fry', 'Bender'];
 
     // and we want to make a copy of it.
+    const team = players;
+    // console.log(players, team)
 
     // You might think we can just do something like this:
+    team[3] = "Farnsworth"
+    // console.log(players, team)
 
     // however what happens when we update that array?
+      // ** it changes the original array also
 
     // now here is the problem!
 
@@ -27,28 +87,58 @@
     // So, how do we fix this? We take a copy instead!
 
     // one way
+    const team2 = players.slice();
 
     // or create a new array and concat the old one in
+    const team3 = [].concat(players);
 
     // or use the new ES6 Spread
+    const team4 = [...players]
 
     // now when we update it, the original one isn't changed
+    team4[0] = "Zoidberg"
+    console.log("Original:", players)
+    console.log("New:", team4)
+
+    // or Array.from method
+    const team5 = Array.from(players)
+    team5[1] = "Leela"
 
     // The same thing goes for objects, let's say we have a person object
 
     // with Objects
     const person = {
-      name: 'Wes Bos',
+      name: 'Bender Rodriguez',
       age: 80
     };
 
     // and think we make a copy:
+    const captain = person;
+    captain.age = 16;
 
     // how do we take a copy instead?
+    const captain2 = Object.assign({}, person, {age: 99, race: "Robot"});
 
-    // We will hopefully soon see the object ...spread
+    // We will hopefully soon see the object ...spread (this works now)
+    const captain3 = {...person};
 
     // Things to note - this is only 1 level deep - both for Arrays and Objects. lodash has a cloneDeep method, but you should think twice before using it.
+    const dude = {
+      name: "Dude",
+      age: 31,
+      social: {
+        twitter: '@dude',
+        facebook: 'thedude'
+      }
+    };
+
+    console.log(dude);
+
+    const dev = Object.assign({}, dude);
+
+    // Known as "the poor man's deep clone". Might have performance issues.
+    const dev2 = JSON.parse(JSON.stringify(dude));
+
 
   </script>
 
