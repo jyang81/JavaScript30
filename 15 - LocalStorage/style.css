@@ -62,12 +62,12 @@ h2 {
 }
 
 .plates input + label:before {
-  content: "⬜️";
+  content: "🔲";
   margin-right: 10px;
 }
 
 .plates input:checked + label:before {
-  content: "🌮";
+  content: "✅";
 }
 
 .add-items {
@@ -78,4 +78,17 @@ h2 {
   padding: 10px;
   outline: 0;
   border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+#check-all:active, #uncheck-all:active, #delete:active, .add-items input:active  {
+  background-color: lightsalmon;
+  border: 1px solid darkred;
+}
+
+#check-all:hover, #uncheck-all:hover, #delete:hover, .add-items input:hover  {
+  border: 1px solid lightsalmon;
+}
+
+#delete {
+  padding: 5px 24px 8px 20px;
 }
