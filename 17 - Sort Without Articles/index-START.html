@@ -6,15 +6,25 @@
 </head>
 <body>
 
+  <h1>Bands</h1>
   <style>
+    /* * {
+      border: 1px solid red;
+    } */
+
     body {
       margin: 0;
       font-family: sans-serif;
       background: url("https://source.unsplash.com/nDqA4d5NL0k/2000x2000");
       background-size: cover;
       display: flex;
+      flex-direction: column;
       align-items: center;
       min-height: 100vh;
+    }
+
+    h1 {
+      
     }
 
     #bands {
@@ -46,8 +56,24 @@
   <ul id="bands"></ul>
 
 <script>
-const bands = ['The Plot in You', 'The Devil Wears Prada', 'Pierce the Veil', 'Norma Jean', 'The Bled', 'Say Anything', 'The Midway State', 'We Came as Romans', 'Counterparts', 'Oh, Sleeper', 'A Skylit Drive', 'Anywhere But Here', 'An Old Dog'];
+  const bands = ['the lowercase','The Devil Wears Skinny Jeans', 'Pierce the Brosnan', 'Billie Jean', 'The Verve', 'The Empire State', 'We Came as Humans', 'CoolPlay', 'Oh, Henry', 'A Sync\'', 'Anybody but You', 'An Old Yeller', 'The Beatles', 'An The A Minor', 'Zed Leppelin', 'The An A (DNA)', 'A An The B', 'The, The'];
+ 
+  // console.log(bands)
 
+  const sortedBands = bands.sort((a,b) => strip(a) > strip(b) ? 1 : -1);
+
+  function strip(band) {
+    return band.trim().replace(/^The\s|A\s|An\s/i, "").toLowerCase();
+  }
+
+  // console.log(sortedBands);
+
+  const list = document.getElementById('bands');
+  sortedBands.forEach(band => {
+    const li = document.createElement('li');
+    li.textContent = band;
+    list.appendChild(li)
+  })
 
 </script>
 
