@@ -9,15 +9,16 @@
   <style>
     body {
       text-align: center;
-      font-family: sans-serif;
+      font-family: 'Proxima Nova', sans-serif;
     }
     code {
-      background-color: lightgray;
+      font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+      color: #1900a5;
+      background-color: #dfecf3;
       padding: 0.2rem 0.4rem;
-      font-size: 1.1rem;
     }
   </style>
-
+  <p><a href="../index.html">Return Home</a></p>
   <h1>Reference vs Copy</h1>
   <h3>(Open the console)</h3>
   <p>Strings, numbers, and booleans create copies when you assign them to another variable.</p>
@@ -35,13 +36,13 @@
   <p>In order to avoid this behavior, you can make a copy using various methods:</p>
   <p>Note: this only creates a shallow copy!</p>
   <p>The spread operator: <code>let array2 = [...array]</code></p>
-  <p>Array.from(): <code>let array2 = Array.from(array)</code></p>
-  <p>.slice(): <code>let array2 = array.slice()</code></p>
-  <p>.concat(): <code>let array2 = [].concat(array)</code></p>
+  <p>Array.from( ): <code>let array2 = Array.from(array)</code></p>
+  <p>.slice( ): <code>let array2 = array.slice()</code></p>
+  <p>.concat( ): <code>let array2 = [].concat(array)</code></p>
   
   <p>For objects:</p>
   <p>The spread operator: <code>let object2 = {...object}</code></p>
-  <p>Object.assign(): <code>let object2 = Object.assign({}, object)</code></p>
+  <p>Object.assign( ): <code>let object2 = Object.assign({}, object)</code></p>
   
 
   <script>
