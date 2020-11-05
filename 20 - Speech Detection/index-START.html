@@ -5,12 +5,58 @@
   <title>Speech Detection</title>
 </head>
 <body>
-
+  <h1 class='header'>Speech Recognition</h1>
+  <p class='header'>🎙 Start speaking and watch your words appear!</p>
   <div class="words" contenteditable>
   </div>
 
 <script>
   window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+  const recognition = new SpeechRecognition();
+  recognition.interimResults = true;
+
+  let p = document.createElement('p');
+  const words = document.querySelector('.words');
+  words.appendChild(p);
+
+  recognition.addEventListener('result', e => {
+
+    const transcript = Array.from(e.results)
+      .map(result => result[0])
+      .map(result => result.transcript)
+      .join('')
+
+    p.textContent = transcript;
+    if (e.results[0].isFinal) {
+      p = document.createElement('p');
+      words.appendChild(p) 
+    }
+    if (transcript.includes('get the weather')) {
+      console.log('The weather is partly cloudy. 🌤')
+    }
+    if (transcript.includes('red')) {
+      p.style.color = 'red';
+    }
+    if (transcript.includes('blue')) {
+      p.style.color = 'blue';
+    }
+    if (transcript.includes('console.log')) {
+      let log = transcript.split(" ").filter(x => x !== 'console.log').join(" ")
+      console.log(log);
+    }
+    if (transcript.includes('clear console')) {
+      console.clear();
+    }
+    // auto scrolls to bottom so you can see the latest text
+    window.scrollTo(0, document.body.scrollHeight);
+  })
+
+  recognition.addEventListener('end', recognition.start);
+
+  recognition.start();
+
+
 
 
 </script>
@@ -26,6 +72,10 @@
       font-family: 'helvetica neue';
       font-weight: 200;
       font-size: 20px;
+    }
+
+    .header {
+      text-align: center;
     }
 
     .words {
