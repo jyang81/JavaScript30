@@ -28,20 +28,45 @@
   }
 
   .one {
-    background: thistle;
+    background: #19c0ff;
   }
 
   .two {
-    background: mistyrose;
+    background: #fcb401;
   }
 
   .three {
-    background: coral;
+    background: #f82b60;
   }
+
+  .center {
+    display: flex;
+    justify-content: center;
+    margin: 1rem;
+  }
+
 </style>
 
-<button></button>
+<span class="center"><button>You can only click me once!</button></span>
 <script>
+
+  const divs = document.querySelectorAll('div');
+  const button = document.querySelector('button')
+  function logText(e) {
+    console.log(this.classList.value);
+    e.stopPropagation(); // stops bubbling (no nested events)
+  }
+
+  divs.forEach(div => div.addEventListener('click', logText, {
+    capture: false, // true: runs top down (one, two , three), false: runs normally - bottom up (three, two, one)
+    once: false // true: unbinds event listener (can only click once!)
+  }))
+
+  button.addEventListener('click', () => {
+    console.log("CLICKED!");
+  }, {
+    once: true
+  })
 
 </script>
 </body>
